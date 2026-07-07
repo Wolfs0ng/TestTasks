@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01da905b19441049fdd00ce4cb18843, type: 3}
+  m_Name: BaseEnemy
+  m_EditorClassIdentifier: Assembly-CSharp::MagicTower.Battle.Data.EnemyDataSO
+  enemyPrefab: {fileID: 5218535436756331204, guid: 85f572cf2bed34e9095d3414a8869516, type: 3}
+  maxHealth: 10
+  moveSpeed: 2
+  attackDamage: 1
+  attackInterval: 1
+  attackRange: 1.5
