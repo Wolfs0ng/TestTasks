@@ -20,8 +20,20 @@ MonoBehaviour:
     rid: 9199168080702078979
   m_ActivePlatformGuid: 
   m_AdditionalPlatformBuildSettings: []
-  m_OverrideGlobalSceneList: 0
-  m_Scenes: []
+  m_OverrideGlobalSceneList: 1
+  m_Scenes:
+  - m_enabled: 1
+    m_path: Assets/Scenes/MainMenu.unity
+    m_guid: 8c9cfa26abfee488c85f1582747f6a02
+  - m_enabled: 1
+    m_path: Assets/Scenes/AceOfShadows.unity
+    m_guid: 71567dd756a4c447b9095eae6e4e02f9
+  - m_enabled: 1
+    m_path: Assets/Scenes/MagicWords.unity
+    m_guid: 347adabda6bd84be4a03819bec21961d
+  - m_enabled: 1
+    m_path: Assets/Scenes/PhoenixFlame.unity
+    m_guid: 96e90fbd66a9f4ace9fb5d9fe532a08c
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
