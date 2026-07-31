@@ -1,5 +1,4 @@
 using System.Collections;
-using CardsChatVfx.MainMenu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +16,6 @@ namespace CardsChatVfx.AceOfShadows
         [SerializeField] private Button moveLeftButton;
         [SerializeField] private Button stopButton;
         [SerializeField] private Button moveRightButton;
-        [SerializeField] private Button backToMenuButton;
 
         [Header("Status")]
         [SerializeField] private GameObject statusMessage;
@@ -29,8 +27,6 @@ namespace CardsChatVfx.AceOfShadows
         [SerializeField, Min(0.01f)] private float movementDuration = 0.65f;
         [SerializeField, Min(0f)] private float arcHeight = 120f;
         [SerializeField] private AnimationCurve movementCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
-
-        private readonly SceneLoader sceneLoader = new();
 
         private Coroutine transferRoutine;
         private bool stopRequested;
@@ -53,7 +49,6 @@ namespace CardsChatVfx.AceOfShadows
             moveLeftButton.onClick.AddListener(HandleMoveLeftClicked);
             stopButton.onClick.AddListener(HandleStopClicked);
             moveRightButton.onClick.AddListener(HandleMoveRightClicked);
-            backToMenuButton.onClick.AddListener(HandleBackToMenuClicked);
         }
 
         private void EventsUnsubscribe()
@@ -61,7 +56,6 @@ namespace CardsChatVfx.AceOfShadows
             moveLeftButton.onClick.RemoveListener(HandleMoveLeftClicked);
             stopButton.onClick.RemoveListener(HandleStopClicked);
             moveRightButton.onClick.RemoveListener(HandleMoveRightClicked);
-            backToMenuButton.onClick.RemoveListener(HandleBackToMenuClicked);
         }
 
         private void InitializeScene()
@@ -95,18 +89,6 @@ namespace CardsChatVfx.AceOfShadows
             stopButton.interactable = false;
 
             ShowStatus("Stopping...");
-        }
-
-        private async void HandleBackToMenuClicked()
-        {
-            if (sceneLoader.IsLoading)
-            {
-                return;
-            }
-
-            SetAllControlsInteractable(false);
-
-            await sceneLoader.LoadAsync(AppScene.MainMenu);
         }
 
         private void StartTransfer(CardStackView sourceStack, CardStackView destinationStack)
@@ -197,7 +179,6 @@ namespace CardsChatVfx.AceOfShadows
             moveLeftButton.interactable = !IsTransferring && rightStack.Count > 0;
             moveRightButton.interactable = !IsTransferring && leftStack.Count > 0;
             stopButton.interactable = IsTransferring && !stopRequested;
-            backToMenuButton.interactable = !sceneLoader.IsLoading;
         }
 
         private void SetAllControlsInteractable(bool isInteractable)
@@ -205,7 +186,6 @@ namespace CardsChatVfx.AceOfShadows
             moveLeftButton.interactable = isInteractable;
             moveRightButton.interactable = isInteractable;
             stopButton.interactable = isInteractable;
-            backToMenuButton.interactable = isInteractable;
         }
     }
 }

@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183f5219be824284a8e731d7072802b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardsChatVfx.MagicWords.MagicWordsController
-  backToMenuButton: {fileID: 924341815}
   endpoint: https://private-624120-softgamesassignment.apiary-mock.com/v3/magicwords
   dialogueContent: {fileID: 2013252849}
   dialogueElementPrefab: {fileID: 8131114714830410777, guid: e3c1ace15c2614a319c3f6392ab7988a, type: 3}
@@ -1003,6 +1002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 924341814}
   - component: {fileID: 924341817}
+  - component: {fileID: 924341819}
   - component: {fileID: 924341818}
   - component: {fileID: 924341816}
   - component: {fileID: 924341815}
@@ -1135,6 +1135,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &924341819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924341813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efafccf0a8354a6089872a75d50c9e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardsChatVfx.Common.BackToMenuButton
+  backToMenuButton: {fileID: 924341815}
 --- !u!1 &931199495
 GameObject:
   m_ObjectHideFlags: 0

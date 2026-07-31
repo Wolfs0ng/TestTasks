@@ -12,9 +12,6 @@ namespace CardsChatVfx.MagicWords
     public sealed class MagicWordsController : MonoBehaviour
     {
         private const string DefaultEndpoint = "https://private-624120-softgamesassignment.apiary-mock.com/v3/magicwords";
-
-        [Header("Controls")]
-        [SerializeField] private Button backToMenuButton;
         
         [Header("API")]
         [SerializeField] private string endpoint = DefaultEndpoint;
@@ -37,8 +34,6 @@ namespace CardsChatVfx.MagicWords
         [SerializeField] private TextMeshProUGUI errorText;
         [SerializeField] private Button retryButton;
         
-        private readonly SceneLoader sceneLoader = new();
-        
         private readonly Queue<DialogueElementView> availableElements = new();
         private readonly List<DialogueElementView> allElements = new();
         private readonly List<DialogueElementView> activeElements = new();
@@ -59,11 +54,6 @@ namespace CardsChatVfx.MagicWords
                 retryButton.onClick.AddListener(Reload);
                 retryButton.gameObject.SetActive(false);
             }
-
-            if (backToMenuButton != null)
-            {
-	            backToMenuButton.onClick.AddListener(HandleBackToMenuClicked);
-            }
         }
 
         private void Start()
@@ -76,11 +66,6 @@ namespace CardsChatVfx.MagicWords
             if (retryButton != null)
             {
                 retryButton.onClick.RemoveListener(Reload);
-            }
-
-            if (backToMenuButton != null)
-            {
-	            backToMenuButton.onClick.RemoveListener(HandleBackToMenuClicked);
             }
 
             avatarImageLoader?.Dispose();
@@ -134,7 +119,6 @@ namespace CardsChatVfx.MagicWords
             catch (Exception exception)
             {
                 Debug.LogException(exception);
-
                 ShowErrorState("The dialogue data could not be read.");
                 yield break;
             }
@@ -270,19 +254,6 @@ namespace CardsChatVfx.MagicWords
                 allElements.Add(element);
                 availableElements.Enqueue(element);
             }
-        }
-        
-        private async void HandleBackToMenuClicked()
-        {
-            if (sceneLoader.IsLoading)
-            {
-                return;
-            }
-
-            retryButton.interactable = false;
-            backToMenuButton.interactable = false;
-            
-            await sceneLoader.LoadAsync(AppScene.MainMenu);
         }
 
         private DialogueElementView AcquireDialogueElement()
