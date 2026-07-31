@@ -12,6 +12,10 @@ namespace CardsChatVfx.AceOfShadows
         [SerializeField] private CardStackView rightStack;
         [SerializeField] private RectTransform transferLayer;
 
+        [Header("Cards")]
+        [SerializeField] private CardView cardPrefab;
+        [SerializeField, Min(1)] private int requiredCardCount = 144;
+
         [Header("Controls")]
         [SerializeField] private Button moveLeftButton;
         [SerializeField] private Button stopButton;
@@ -63,9 +67,28 @@ namespace CardsChatVfx.AceOfShadows
             leftStack.Initialize();
             rightStack.Initialize();
 
+            SpawnMissingCards();
+
             statusMessage.SetActive(false);
 
             RefreshControls();
+        }
+
+        private void SpawnMissingCards()
+        {
+            int existingCardCount = leftStack.Count + rightStack.Count;
+            int missingCardCount = requiredCardCount - existingCardCount;
+
+            if (missingCardCount <= 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < missingCardCount; i++)
+            {
+                CardView card = Instantiate(cardPrefab);
+                leftStack.AddCard(card);
+            }
         }
 
         private void HandleMoveLeftClicked()
@@ -156,7 +179,7 @@ namespace CardsChatVfx.AceOfShadows
             Vector3 destinationWorldPosition = destinationStack.GetNextCardWorldPosition();
 
             yield return card.MoveTo(transferLayer, destinationWorldPosition, movementDuration,
-                arcHeight, movementCurve);
+	            arcHeight, movementCurve);
 
             destinationStack.AddCard(card);
         }
@@ -164,7 +187,6 @@ namespace CardsChatVfx.AceOfShadows
         private void ShowCompletionMessage(CardStackView destinationStack)
         {
             string destinationName = ReferenceEquals(destinationStack, leftStack) ? "left" : "right";
-
             ShowStatus($"All cards moved to the {destinationName} stack!");
         }
 
@@ -179,13 +201,6 @@ namespace CardsChatVfx.AceOfShadows
             moveLeftButton.interactable = !IsTransferring && rightStack.Count > 0;
             moveRightButton.interactable = !IsTransferring && leftStack.Count > 0;
             stopButton.interactable = IsTransferring && !stopRequested;
-        }
-
-        private void SetAllControlsInteractable(bool isInteractable)
-        {
-            moveLeftButton.interactable = isInteractable;
-            moveRightButton.interactable = isInteractable;
-            stopButton.interactable = isInteractable;
         }
     }
 }
